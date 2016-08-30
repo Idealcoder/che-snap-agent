@@ -82,6 +82,11 @@ func setup() (conf Config){
     fmt.Println("")
   }
 
+  //remove trailing space if there is
+  if conf.Endpoint[len(conf.Endpoint)-1:] == "/" {
+    conf.Endpoint = conf.Endpoint[:len(conf.Endpoint)-1]
+  }
+
   resp, err := http.Get(conf.Endpoint+"/api/")
   if (err != nil) || (resp.Status != "200 OK"){
     fmt.Println("Cannot connect to Eclipse Che endpoint. Check URL and internet connection")
